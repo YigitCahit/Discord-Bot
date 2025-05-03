@@ -81,11 +81,7 @@ Bot, kullanıcılar mesaj attıkça XP kazanır ve belirli seviyelere ulaştığ
 Roller şu şekilde ayarlanabilir:
 
 - `/rank kurulum` komutunu kullanarak varsayılan rol ayarlarını kullanabilirsiniz:
-  - Level 1: Bronz (ID: 1358033154291667036)
-  - Level 5: Gümüş (ID: 1358033389332074669) 
-  - Level 10: Platin (ID: 1358033879319183370)
-  - Level 15: Altın (ID: 1358033965952274565)
-  - Level 20: Elmas (ID: 1358034021375807529)
+  - Otomatik kurulum için ilgili rollein ID'lerini `rank_roles.txt` dosyasına ekleyebilirsiniz.
 
 - Ya da `/rank rol_ayarla` komutunu kullanarak kendi rol ayarlarınızı yapabilirsiniz.
 
@@ -94,7 +90,3 @@ Roller şu şekilde ayarlanabilir:
 1. Bu repo'yu fork edin
 2. Yeni özellikler ekleyin veya hataları düzeltin
 3. Pull request gönderin
-
-## Lisans
-
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
