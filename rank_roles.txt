@@ -1,0 +1,17 @@
+# Format: seviye=rol_id
+# Bu dosya rank rolleri için seviye ve rol ID eşleştirmelerini içerir
+
+# Elmas
+20=ROLE_ID
+
+# Altın
+15=ROLE_ID
+
+# Platin
+10=ROLE_ID
+
+# Gümüş
+5=ROLE_ID
+
+# Bronz
+1=ROLE_ID
