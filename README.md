@@ -129,7 +129,8 @@ Bot'u sunucuya eklerken şu izinleri verin:
    - Seviye 2: 200 XP
    - Seviye 10: 1000 XP
 3. **Otomatik Rol**: Belirli seviyelere ulaşıldığında otomatik roller verilir
-4. **Çoklu Sunucu**: Her sunucuda ayrı rank sistemi
+4. **Otomatik Rol Güncelleme**: Yeni seviyeye ulaşıldığında önceki rank rolleri otomatik kaldırılır
+5. **Çoklu Sunucu**: Her sunucuda ayrı rank sistemi
 
 ### Rank Rolleri Ayarlama
 

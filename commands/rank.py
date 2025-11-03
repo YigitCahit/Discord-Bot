@@ -235,11 +235,28 @@ async def setup(bot):
         # XP ekle
         result = await database.add_xp(message.author.id, message.guild.id, xp_amount)
         
-        # Level atladıysa rol ver (sessiz bir şekilde, bildirim olmadan)
-        if result["level_up"] and result["role_id"]:
-            role = message.guild.get_role(result["role_id"])
-            if role and not role in message.author.roles:
-                try:
-                    await message.author.add_roles(role)
-                except discord.Forbidden:
-                    pass  # Rol verme yetkisi yok
+        # Level atladıysa rol işlemlerini yap
+        if result["level_up"]:
+            try:
+                # Tüm rank rollerini al
+                all_rank_roles = await database.get_rank_roles(message.guild.id)
+                
+                # Önceki rank rollerini kaldır
+                roles_to_remove = []
+                for level, role_id in all_rank_roles:
+                    if level < result["new_level"]:  # Yeni seviyeden düşük olan tüm roller
+                        old_role = message.guild.get_role(role_id)
+                        if old_role and old_role in message.author.roles:
+                            roles_to_remove.append(old_role)
+                
+                if roles_to_remove:
+                    await message.author.remove_roles(*roles_to_remove, reason="Yeni seviyeye ulaşıldı")
+                
+                # Yeni seviye rolünü ver
+                if result["role_id"]:
+                    new_role = message.guild.get_role(result["role_id"])
+                    if new_role and new_role not in message.author.roles:
+                        await message.author.add_roles(new_role, reason=f"Level {result['new_level']}'e ulaşıldı")
+                        
+            except discord.Forbidden:
+                pass  # Rol verme/kaldırma yetkisi yok
