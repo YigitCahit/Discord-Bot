@@ -4,7 +4,6 @@ from discord.ext import commands
 import datetime
 import asyncio
 import database
-import os
 
 class RankKomutlar(app_commands.Group):
     def __init__(self, bot):
@@ -196,59 +195,6 @@ class RankKomutlar(app_commands.Group):
                 )
         
         await interaction.response.send_message(embed=embed)
-    
-    @app_commands.command(name="kurulum", description="Rank sistemini otomatik olarak kur")
-    @app_commands.checks.has_permissions(administrator=True)
-    async def setup_ranks(self, interaction: discord.Interaction):
-        """Belirtilen rolleri otomatik olarak ayarla"""
-        await interaction.response.defer(ephemeral=True)
-        
-        guild = interaction.guild
-        
-        # Rolleri txt dosyasından oku
-        rank_roles = {}
-        roles_txt_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'rank_roles.txt')
-        
-        try:
-            with open(roles_txt_path, 'r', encoding='utf-8') as f:
-                for line in f:
-                    line = line.strip()
-                    # # ile başlayan satırları yorum olarak atla
-                    if not line or line.startswith('#'):
-                        continue
-                    
-                    # level=role_id formatında olmalı
-                    if '=' in line:
-                        parts = line.split('=')
-                        if len(parts) == 2:
-                            try:
-                                level = int(parts[0].strip())
-                                role_id = int(parts[1].strip())
-                                rank_roles[level] = role_id
-                            except ValueError:
-                                continue
-        except Exception as e:
-            await interaction.followup.send(f"Rol dosyası okunurken bir hata oluştu: {e}")
-            return
-        
-        if not rank_roles:
-            await interaction.followup.send("Rol dosyasında geçerli rol tanımı bulunamadı. Lütfen rank_roles.txt dosyasını kontrol edin.")
-            return
-        
-        # Rolleri ayarla
-        set_roles = []
-        for level, role_id in rank_roles.items():
-            role = guild.get_role(role_id)
-            if role:
-                await database.set_rank_role(guild.id, level, role_id)
-                set_roles.append(f"• Level {level}: {role.name}")
-        
-        if set_roles:
-            await interaction.followup.send(
-                f"Rank rolleri başarıyla ayarlandı:\n" + "\n".join(set_roles)
-            )
-        else:
-            await interaction.followup.send("Hiçbir rol ayarlanamadı. Rol ID'lerinin doğru olduğundan emin olun.")
 
 async def setup(bot):
     # Veritabanını başlat

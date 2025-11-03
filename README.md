@@ -118,7 +118,6 @@ Bot'u sunucuya eklerken şu izinleri verin:
 | `/rank liderlik [limit]` | Sunucu liderlik tablosu (max 25) | - |
 | `/rank rol_ayarla <seviye> <rol>` | Belirli seviye için otomatik rol atar | Yönetici |
 | `/rank roller` | Tüm rank rollerini görüntüler | - |
-| `/rank kurulum` | `rank_roles.txt` dosyasından toplu rol atar | Yönetici |
 
 ## 🎯 Rank Sistemi
 
@@ -134,30 +133,16 @@ Bot'u sunucuya eklerken şu izinleri verin:
 
 ### Rank Rolleri Ayarlama
 
-#### Yöntem 1: Manuel
+Her sunucu başlangıçta boş rank sistemi ile gelir. Roller manuel olarak ayarlanmalıdır:
 
 ```
 /rank rol_ayarla seviye:5 rol:@Bronze
 /rank rol_ayarla seviye:10 rol:@Silver
 /rank rol_ayarla seviye:20 rol:@Gold
+/rank rol_ayarla seviye:50 rol:@Platinum
 ```
 
-#### Yöntem 2: Toplu Kurulum
-
-`rank_roles.txt` dosyasını düzenleyin:
-
-```
-# Seviye=Rol_ID formatında
-5=123456789012345678
-10=234567890123456789
-20=345678901234567890
-```
-
-Sonra komutu çalıştırın:
-
-```
-/rank kurulum
-```
+**Not:** Her sunucu için rollerin ayrı ayrı ayarlanması gerekir.
 
 ### Sunucu Başına Ayrı Sistem
 
@@ -171,7 +156,6 @@ Sonra komutu çalıştırın:
 Discord-Bot/
 ├── main.py                 # Ana bot dosyası
 ├── database.py             # Veritabanı işlemleri
-├── rank_roles.txt          # Toplu rol ayarları
 ├── requirements.txt        # Python bağımlılıkları
 ├── .env                    # Ortam değişkenleri (TOKEN)
 ├── .gitignore             # Git ignore ayarları
