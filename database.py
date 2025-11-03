@@ -10,13 +10,13 @@ async def init_db():
         # Rank tablosunu oluştur
         await db.execute('''
         CREATE TABLE IF NOT EXISTS user_ranks (
-            user_id INTEGER PRIMARY KEY,
+            user_id INTEGER NOT NULL,
             guild_id INTEGER NOT NULL,
             xp INTEGER DEFAULT 0,
             level INTEGER DEFAULT 0,
             messages INTEGER DEFAULT 0,
             last_message_time TEXT,
-            UNIQUE(user_id, guild_id)
+            PRIMARY KEY(user_id, guild_id)
         )
         ''')
         
@@ -28,11 +28,13 @@ async def init_db():
         )
         ''')
         
-        # Rol tablosunu oluştur (level başına verilecek roller)
+        # Rol tablosunu oluştur (level başına verilecek roller, sunucu bazlı)
         await db.execute('''
         CREATE TABLE IF NOT EXISTS rank_roles (
-            level INTEGER PRIMARY KEY,
-            role_id INTEGER NOT NULL
+            guild_id INTEGER NOT NULL,
+            level INTEGER NOT NULL,
+            role_id INTEGER NOT NULL,
+            PRIMARY KEY(guild_id, level)
         )
         ''')
         
@@ -109,8 +111,8 @@ async def add_xp(user_id, guild_id, xp_amount):
         if level_up:
             cursor = await db.execute('''
             SELECT role_id FROM rank_roles
-            WHERE level = ?
-            ''', (new_level,))
+            WHERE guild_id = ? AND level = ?
+            ''', (guild_id, new_level))
             role_data = await cursor.fetchone()
             if role_data:
                 role_id = role_data[0]
@@ -178,19 +180,23 @@ async def get_leaderboard(guild_id, limit=10):
         leaderboard = await cursor.fetchall()
         return leaderboard
 
-async def set_rank_role(level, role_id):
+async def set_rank_role(guild_id, level, role_id):
     """Bir level için otomatik verilecek rolü ayarla"""
     async with aiosqlite.connect(DATABASE_PATH) as db:
         await db.execute('''
-        INSERT OR REPLACE INTO rank_roles (level, role_id)
-        VALUES (?, ?)
-        ''', (level, role_id))
+        INSERT OR REPLACE INTO rank_roles (guild_id, level, role_id)
+        VALUES (?, ?, ?)
+        ''', (guild_id, level, role_id))
         await db.commit()
 
-async def get_rank_roles():
+async def get_rank_roles(guild_id):
     """Tüm rank rollerini al"""
     async with aiosqlite.connect(DATABASE_PATH) as db:
-        cursor = await db.execute('SELECT level, role_id FROM rank_roles ORDER BY level')
+        cursor = await db.execute('''
+        SELECT level, role_id FROM rank_roles 
+        WHERE guild_id = ? 
+        ORDER BY level
+        ''', (guild_id,))
         roles = await cursor.fetchall()
         return roles
 

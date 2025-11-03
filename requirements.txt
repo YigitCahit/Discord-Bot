@@ -1,3 +1,10 @@
-discord.py>=2.0.0
-python-dotenv==0.19.2
-aiosqlite==0.17.0
+# Discord Bot Requirements
+
+# Discord.py - Discord API wrapper
+discord.py>=2.3.0
+
+# Environment variables management
+python-dotenv>=1.0.0
+
+# Async SQLite database
+aiosqlite>=0.19.0

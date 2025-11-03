@@ -1,92 +1,248 @@
-# Discord Slash Bot
+# 🤖 Discord Bot - Türkçe Çoklu Sunucu Desteği
 
-Discord için geliştirilmiş slash komutlarını destekleyen Türkçe bir bot.
+Modern Discord.py ile geliştirilmiş, slash komutları destekleyen ve çoklu sunucu yapısına sahip profesyonel Türkçe Discord botu.
 
-## Özellikler
+[![Discord.py](https://img.shields.io/badge/discord.py-2.3.0+-blue.svg)](https://github.com/Rapptz/discord.py)
+[![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-- Slash komutları (/komut) desteği
-- Modüler yapı
-- Moderasyon komutları (temizle, at, yasakla, vb.)
-- Mesaj gönderme komutu (yöneticiler için)
-- Sunucu bilgileri
-- Kullanıcı bilgileri
-- Rank sistemi (seviye/XP) ve otomatik rol atama
-- SQLite veritabanı desteği
-- ve daha fazlası!
+## ✨ Özellikler
 
-## Kurulum
+- ⚡ **Slash Komutları** - Modern Discord slash komut sistemi
+- 🏗️ **Modüler Yapı** - Kolay genişletilebilir ve bakımı yapılabilir
+- 🌐 **Çoklu Sunucu Desteği** - Her sunucu için bağımsız rank sistemi
+- 🎮 **Rank Sistemi** - XP kazanma, seviye atlama ve otomatik rol atama
+- 🛡️ **Moderasyon Araçları** - Mesaj silme, kullanıcı atma/yasaklama
+- 💾 **SQLite Veritabanı** - Hızlı ve güvenilir veri saklama
+- 📊 **Liderlik Tablosu** - Sunucu bazlı XP sıralaması
+- 🎨 **Kullanıcı Dostu** - Türkçe arayüz ve detaylı embed mesajları
 
-1. Bu repo'yu klonlayın veya indirin
-2. `pip install -r requirements.txt` komutu ile gerekli paketleri yükleyin
-3. `.env` dosyasındaki `TOKEN` değişkenine Discord bot token'ınızı ekleyin
-4. `python main.py` komutu ile botu çalıştırın
+## 📋 Gereksinimler
 
-## Bot Token Alma
+- Python 3.8 veya üzeri
+- Discord.py 2.3.0+
+- aiosqlite
+- python-dotenv
+
+## 🚀 Kurulum
+
+### 1. Projeyi İndirin
+
+```bash
+git clone https://github.com/YigitCahit/Discord-Bot.git
+cd Discord-Bot
+```
+
+### 2. Bağımlılıkları Yükleyin
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Ortam Değişkenlerini Ayarlayın
+
+Proje klasöründe `.env` dosyası oluşturun:
+
+```env
+TOKEN=your_discord_bot_token_here
+```
+
+### 4. Botu Çalıştırın
+
+```bash
+python main.py
+```
+
+## 🔑 Bot Token Alma
 
 1. [Discord Developer Portal](https://discord.com/developers/applications)'a gidin
-2. "New Application" butonuna tıklayın
-3. Bot için bir isim belirleyin ve "Create" butonuna tıklayın
-4. Sol menüden "Bot" sekmesine tıklayın
-5. "Add Bot" butonuna tıklayın
-6. "Reset Token" butonuna tıklayın ve token'ı kopyalayın
-7. Bu token'ı `.env` dosyasına ekleyin
+2. **"New Application"** butonuna tıklayın
+3. Uygulamanıza bir isim verin ve **"Create"** deyin
+4. Sol menüden **"Bot"** sekmesine gidin
+5. **"Add Bot"** butonuna tıklayın
+6. **"Reset Token"** ile token'ınızı alın
+7. Token'ı `.env` dosyasına ekleyin
 
-## Bot İzinleri Yapılandırma
+### Bot İzinleri
 
-Bot'unuzu sunucunuza eklerken aşağıdaki izinlere sahip olduğundan emin olun:
+Bot'u sunucuya eklerken şu izinleri verin:
 
-- `applications.commands` (Slash komutları için)
-- `bot` (Bot fonksiyonları için)
+- ✅ `applications.commands` - Slash komutları için
+- ✅ `Manage Roles` - Rank rolleri vermek için
+- ✅ `Kick Members` - Kullanıcı atmak için
+- ✅ `Ban Members` - Kullanıcı yasaklamak için
+- ✅ `Manage Messages` - Mesaj silmek için
+- ✅ `Read Messages/View Channels` - Mesajları okumak için
+- ✅ `Send Messages` - Mesaj göndermek için
 
-## Komutlar
+## 📚 Komutlar
 
-Bot şu kategorilerdeki komutları destekler:
+### 🔹 Genel Komutlar
 
-### Genel Komutlar
+| Komut | Açıklama |
+|-------|----------|
+| `/genel ping` | Bot'un gecikmesini (latency) gösterir |
+| `/genel merhaba` | Bot sizi selamlar |
+| `/genel yardım` | Tüm komutlar hakkında bilgi verir |
 
-- `/genel ping` - Bot gecikmesini gösterir
-- `/genel merhaba` - Bot size merhaba der
-- `/genel yardım` - Komutlar hakkında bilgi alır
+### 🔹 Sunucu Komutları
 
-### Sunucu Komutları
+| Komut | Açıklama |
+|-------|----------|
+| `/sunucu bilgi` | Sunucu hakkında detaylı bilgiler |
+| `/sunucu roller` | Sunucudaki tüm rolleri listeler |
+| `/sunucu emoji` | Sunucudaki özel emojileri gösterir |
 
-- `/sunucu bilgi` - Sunucu hakkında bilgiler
-- `/sunucu roller` - Sunucudaki rolleri listeler
-- `/sunucu emoji` - Sunucudaki emojileri listeler
+### 🔹 Kullanıcı Komutları
 
-### Kullanıcı Komutları
+| Komut | Açıklama |
+|-------|----------|
+| `/kullanıcı avatar [kullanıcı]` | Avatarı büyük boyutta gösterir |
+| `/kullanıcı bilgi [kullanıcı]` | Kullanıcı profili ve istatistikleri |
 
-- `/kullanıcı avatar` - Kullanıcının avatarını gösterir
-- `/kullanıcı bilgi` - Kullanıcı hakkında bilgi gösterir
+### 🔹 Moderasyon Komutları
 
-### Moderasyon Komutları
+| Komut | Açıklama | Gerekli İzin |
+|-------|----------|--------------|
+| `/moderasyon temizle <miktar>` | Belirtilen sayıda mesajı siler | Mesajları Yönet |
+| `/moderasyon at <kullanıcı> [sebep]` | Kullanıcıyı sunucudan atar | Üyeleri At |
+| `/moderasyon yasakla <kullanıcı> [sebep]` | Kullanıcıyı yasaklar | Üyeleri Yasakla |
+| `/moderasyon yasak_kaldır <kullanıcı_id>` | Yasağı kaldırır | Üyeleri Yasakla |
+| `/moderasyon söyle <kanal> <mesaj>` | Belirtilen kanala mesaj gönderir | Yönetici |
 
-- `/moderasyon temizle` - Belirtilen sayıda mesajı siler
-- `/moderasyon at` - Bir kullanıcıyı sunucudan atar
-- `/moderasyon yasakla` - Bir kullanıcıyı yasaklar
-- `/moderasyon yasak_kaldır` - Bir kullanıcının yasağını kaldırır
-- `/moderasyon söyle` - Bot aracılığıyla belirtilen kanala mesaj gönderir (yönetici yetkisi gerektirir)
+### 🎮 Rank Sistemi Komutları
 
-### Rank Sistemi Komutları
+| Komut | Açıklama | Gerekli İzin |
+|-------|----------|--------------|
+| `/rank profil [kullanıcı]` | Seviye profili ve ilerleme çubuğu | - |
+| `/rank liderlik [limit]` | Sunucu liderlik tablosu (max 25) | - |
+| `/rank rol_ayarla <seviye> <rol>` | Belirli seviye için otomatik rol atar | Yönetici |
+| `/rank roller` | Tüm rank rollerini görüntüler | - |
+| `/rank kurulum` | `rank_roles.txt` dosyasından toplu rol atar | Yönetici |
 
-- `/rank profil` - Kullanıcının seviye profilini gösterir
-- `/rank liderlik` - Sunucudaki seviye liderlik tablosunu gösterir
-- `/rank rol_ayarla` - Belirli bir seviye için otomatik rol atar (yönetici yetkisi gerektirir)
-- `/rank roller` - Tüm seviye rollerini görüntüler
-- `/rank kurulum` - Rank sistemini otomatik olarak kurar (yönetici yetkisi gerektirir)
+## 🎯 Rank Sistemi
 
-## Rank Sistemi Kullanımı
+### Nasıl Çalışır?
 
-Bot, kullanıcılar mesaj attıkça XP kazanır ve belirli seviyelere ulaştığında otomatik olarak roller verilir.
-Roller şu şekilde ayarlanabilir:
+1. **XP Kazanma**: Kullanıcılar her mesaj attığında 5 XP kazanır (60 saniye cooldown)
+2. **Seviye Atlama**: Her seviye için `seviye × 100` XP gerekir
+   - Seviye 1: 100 XP
+   - Seviye 2: 200 XP
+   - Seviye 10: 1000 XP
+3. **Otomatik Rol**: Belirli seviyelere ulaşıldığında otomatik roller verilir
+4. **Çoklu Sunucu**: Her sunucuda ayrı rank sistemi
 
-- `/rank kurulum` komutunu kullanarak varsayılan rol ayarlarını kullanabilirsiniz:
-  - Otomatik kurulum için ilgili rollein ID'lerini `rank_roles.txt` dosyasına ekleyebilirsiniz.
+### Rank Rolleri Ayarlama
 
-- Ya da `/rank rol_ayarla` komutunu kullanarak kendi rol ayarlarınızı yapabilirsiniz.
+#### Yöntem 1: Manuel
 
-## Katkıda Bulunma
+```
+/rank rol_ayarla seviye:5 rol:@Bronze
+/rank rol_ayarla seviye:10 rol:@Silver
+/rank rol_ayarla seviye:20 rol:@Gold
+```
 
-1. Bu repo'yu fork edin
-2. Yeni özellikler ekleyin veya hataları düzeltin
-3. Pull request gönderin
+#### Yöntem 2: Toplu Kurulum
+
+`rank_roles.txt` dosyasını düzenleyin:
+
+```
+# Seviye=Rol_ID formatında
+5=123456789012345678
+10=234567890123456789
+20=345678901234567890
+```
+
+Sonra komutu çalıştırın:
+
+```
+/rank kurulum
+```
+
+### Sunucu Başına Ayrı Sistem
+
+✅ Sunucu A'da Level 50 olabilirsiniz
+✅ Sunucu B'de Level 1'den başlarsınız
+✅ Her sunucu kendi rollerini ayarlar
+
+## 📁 Proje Yapısı
+
+```
+Discord-Bot/
+├── main.py                 # Ana bot dosyası
+├── database.py             # Veritabanı işlemleri
+├── rank_roles.txt          # Toplu rol ayarları
+├── requirements.txt        # Python bağımlılıkları
+├── .env                    # Ortam değişkenleri (TOKEN)
+├── .gitignore             # Git ignore ayarları
+├── commands/              # Komut modülleri
+│   ├── genel.py           # Genel komutlar
+│   ├── sunucu.py          # Sunucu komutları
+│   ├── kullanici.py       # Kullanıcı komutları
+│   ├── moderasyon.py      # Moderasyon komutları
+│   └── rank.py            # Rank sistemi komutları
+└── README.md              # Bu dosya
+```
+
+## 🗄️ Veritabanı Yapısı
+
+### user_ranks
+Her kullanıcının her sunucudaki rank bilgisi
+```sql
+PRIMARY KEY (user_id, guild_id)
+- xp: Toplam XP
+- level: Mevcut seviye
+- messages: Toplam mesaj sayısı
+- last_message_time: Son mesaj zamanı (cooldown için)
+```
+
+### rank_roles
+Her sunucunun rank rolleri
+```sql
+PRIMARY KEY (guild_id, level)
+- role_id: Verilecek rol ID'si
+```
+
+### rank_settings
+Sunucu bazlı XP ayarları
+```sql
+- xp_per_message: Mesaj başına XP (varsayılan: 5)
+- xp_cooldown: Cooldown süresi saniye (varsayılan: 60)
+- level_up_channel: Level atlama bildirimi kanalı (opsiyonel)
+```
+
+## 🔧 Konfigürasyon
+
+### XP Ayarları
+
+Veritabanında `rank_settings` tablosunda sunucu bazlı ayarlanır:
+
+- **xp_per_message**: Mesaj başına verilen XP miktarı
+- **xp_cooldown**: XP kazanma aralığı (saniye)
+- **level_up_channel**: Level atlama bildirimlerinin gönderileceği kanal
+
+## 🤝 Katkıda Bulunma
+
+1. Bu projeyi fork edin
+2. Yeni bir branch oluşturun (`git checkout -b feature/yeniOzellik`)
+3. Değişikliklerinizi commit edin (`git commit -am 'Yeni özellik eklendi'`)
+4. Branch'inizi push edin (`git push origin feature/yeniOzellik`)
+5. Pull Request oluşturun
+
+## 📝 Lisans
+
+Bu proje MIT lisansı altında lisanslanmıştır.
+
+## 🐛 Sorun Bildirme
+
+Bir hata bulduysanız veya öneriniz varsa lütfen [Issues](https://github.com/YigitCahit/Discord-Bot/issues) sayfasından bildirebilirsiniz.
+
+## 👤 Geliştirici
+
+**Yigit Cahit**
+
+- GitHub: [@YigitCahit](https://github.com/YigitCahit)
+
+---
+
+⭐ Bu projeyi faydalı bulduysanız yıldız vermeyi unutmayın!

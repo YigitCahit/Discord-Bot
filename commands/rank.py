@@ -56,7 +56,7 @@ class RankKomutlar(app_commands.Group):
         )
         
         # Kullanıcının rankına göre rol bilgisini ekle
-        roles = await database.get_rank_roles()
+        roles = await database.get_rank_roles(guild.id)
         user_rank_role = None
         next_rank_role = None
         
@@ -156,8 +156,10 @@ class RankKomutlar(app_commands.Group):
         if seviye < 1:
             return await interaction.response.send_message("Seviye 1'den küçük olamaz!", ephemeral=True)
         
+        guild = interaction.guild
+        
         # Rolü ayarla
-        await database.set_rank_role(seviye, rol.id)
+        await database.set_rank_role(guild.id, seviye, rol.id)
         
         await interaction.response.send_message(
             f"Level {seviye} için rank rolü {rol.mention} olarak ayarlandı.",
@@ -169,7 +171,7 @@ class RankKomutlar(app_commands.Group):
         guild = interaction.guild
         
         # Tüm rol ayarlarını al
-        roles = await database.get_rank_roles()
+        roles = await database.get_rank_roles(guild.id)
         
         if not roles:
             return await interaction.response.send_message(
@@ -238,7 +240,7 @@ class RankKomutlar(app_commands.Group):
         for level, role_id in rank_roles.items():
             role = guild.get_role(role_id)
             if role:
-                await database.set_rank_role(level, role_id)
+                await database.set_rank_role(guild.id, level, role_id)
                 set_roles.append(f"• Level {level}: {role.name}")
         
         if set_roles:
