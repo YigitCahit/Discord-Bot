@@ -37,9 +37,10 @@ class DiscordBot(discord.Client):
             self.synced = True
         
         # Bot durumunu ayarla
+        bot_status = os.getenv("BOT_STATUS", "/genel yardım | Yardım")
         await self.change_presence(activity=discord.Activity(
             type=discord.ActivityType.watching, 
-            name="/genel yardım | Yardım"
+            name=bot_status
         ))
         
         print(f"Bot olarak giriş yapıldı: {self.user.name}")
