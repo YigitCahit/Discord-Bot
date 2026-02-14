@@ -216,7 +216,7 @@ Veritabanında `rank_settings` tablosunda sunucu bazlı ayarlanır:
 
 ## 📝 Lisans
 
-Bu proje MIT lisansı altında lisanslanmıştır.
+Bu proje AGPL v3.0 lisansı altında lisanslanmıştır.
 
 ## 🐛 Sorun Bildirme
 
