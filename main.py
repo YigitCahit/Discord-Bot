@@ -39,7 +39,7 @@ class DiscordBot(discord.Client):
         # Bot durumunu ayarla
         bot_status = os.getenv("BOT_STATUS", "/genel yardım | Yardım")
         await self.change_presence(activity=discord.Activity(
-            type=discord.ActivityType.watching, 
+            type=discord.ActivityType.playing, 
             name=bot_status
         ))
         
